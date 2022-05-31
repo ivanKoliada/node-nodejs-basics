@@ -1,3 +1,11 @@
 export const parseEnv = () => {
-    // Write your code here 
+  const objEnv = process.env;
+  const arrEnvVar = Object.keys(objEnv)
+    .filter(el => el.includes('RSS_'));
+
+  arrEnvVar.forEach(el => {
+    console.log(`${el}=${process.env[el]};`);
+  });
 };
+
+parseEnv();
