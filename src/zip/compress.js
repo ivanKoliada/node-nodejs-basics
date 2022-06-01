@@ -1,23 +1,18 @@
+import * as url from 'url';
 import { createReadStream, createWriteStream } from 'fs';
 import { join } from 'path';
-import { pipeline } from 'stream';
 import { createGzip } from 'zlib';
 
 const gzip = createGzip();
-const pathToFile = join('files', 'fileToCompress.txt');
-const pathToZipFile = join('files', 'archive.gz');
+const __dirname = url.fileURLToPath(new URL('.', import.meta.url));
+const pathToFile = join(__dirname, 'files', 'fileToCompress.txt');
+const pathToZipFile = join(__dirname, 'files', 'archive.gz');
 
 const readableStream = createReadStream(pathToFile);
 const writableStream = createWriteStream(pathToZipFile);
 
 export const compress = async () => {
-  pipeline(readableStream, gzip, writableStream, (err) => {
-    if (err) {
-      console.error('Pipeline failed.', err);
-    } else {
-      console.log('Pipeline succeeded.');
-    }
-  }) 
+  readableStream.pipe(gzip).pipe(writableStream);
 };
 
 compress();

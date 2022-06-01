@@ -1,8 +1,10 @@
+import * as url from 'url';
 import * as crypto from 'crypto';
 import * as fs from 'fs';
 import { join } from 'path';
 
-const pathToFile = join('files', 'fileToCalculateHashFor.txt');
+const __dirname = url.fileURLToPath(new URL('.', import.meta.url));
+const pathToFile = join(__dirname, 'files', 'fileToCalculateHashFor.txt');
 
 export const calculateHash = async () => {
   fs.readFile(pathToFile, 'utf8', (_, data) => {
