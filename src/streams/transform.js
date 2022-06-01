@@ -1,4 +1,4 @@
-import { Transform, pipeline } from 'stream';
+import { Transform } from 'stream';
 import { stdin, stdout } from 'process';
 
 const reverseStream = new Transform({
@@ -14,14 +14,7 @@ const reverseStream = new Transform({
 });
 
 export const transform = async () => {
-  pipeline(stdin, reverseStream, stdout, (err) => {
-    if (err) {
-      console.error('Pipeline failed.', err);
-    } else {
-      console.log('Pipeline succeeded.');
-    }
-  });
-  // stdin.pipe(reverseStream).pipe(stdout);
+  stdin.pipe(reverseStream).pipe(stdout);
 };
 
 transform();

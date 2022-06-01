@@ -1,12 +1,13 @@
-import * as fs from 'fs';
+import * as url from 'url';
+import { createReadStream } from 'fs';
 import * as path from 'path';
-import { stdout } from 'process';
 
-export const read = async () => { 
-  const pathToFile = path.join('files', 'fileToRead.txt');
-  const readableStream = fs.createReadStream(pathToFile, 'utf8');
+const __dirname = url.fileURLToPath(new URL('.', import.meta.url));
+const pathToFile = path.join(__dirname, 'files', 'fileToRead.txt');
+const readableStream = createReadStream(pathToFile, 'utf8');
 
-  readableStream.pipe(stdout);
+export const read = async () => {
+  readableStream.pipe(process.stdout);
 } 
 
 read();
