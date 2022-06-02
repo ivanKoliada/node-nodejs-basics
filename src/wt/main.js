@@ -15,7 +15,7 @@ export const performCalculations = async () => {
     const value = new Promise(resolve => {
       const worker = new Worker(pathToFile, { workerData: num + i });
       worker.on('message', msg => resolve({status: 'resolved', data: msg}));
-      worker.on('error', msg => resolve({status: 'error', data: null}));
+      worker.on('error', () => resolve({status: 'error', data: null}));
     });
 
     result.push(await value)
