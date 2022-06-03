@@ -8,7 +8,7 @@ const reverseStream = new Transform({
       .split('')
       .reverse()
       .join('');
-    this.push(`${reversedData}\n`);
+    this.push(`\x1b[31m${reversedData}\n\x1b[0m`);
     callback();
   }
 });
