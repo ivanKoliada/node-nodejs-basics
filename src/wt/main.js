@@ -17,11 +17,12 @@ export const performCalculations = async () => {
       worker.on('message', msg => resolve({status: 'resolved', data: msg}));
       worker.on('error', () => resolve({status: 'error', data: null}));
     });
-
-    result.push(await value)
+    
+    result.push(value)
   }
 
-  console.log(result);
+  Promise.all(result).then(data => console.log(data));
+  console.log("main");
  
 }
 
