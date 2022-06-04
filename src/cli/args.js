@@ -16,10 +16,9 @@ export const parseArgs = () => {
   const arrValues = [];
 
   arrSplitArgs
-    .forEach(el => arrValues.push(`${el[0].slice(2)} is ${el[1]}`));
+    .forEach(el => arrValues.push(`${el[0].replace(/^-+/g, '')} is ${el[1]}`));
   
   console.log(arrValues);
 };
 
 parseArgs();
-
