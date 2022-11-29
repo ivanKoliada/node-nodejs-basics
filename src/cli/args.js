@@ -13,12 +13,11 @@ const chunkSize = 2;
 export const parseArgs = () => {
   const arrArgs  = process.argv.slice(2);
   const arrSplitArgs = splitArr(arrArgs, chunkSize);
-  const arrValues = [];
+  const result = [];
 
-  arrSplitArgs
-    .forEach(el => arrValues.push(`${el[0].replace(/^-+/g, '')} is ${el[1]}`));
+  arrSplitArgs.forEach((el) => result.push(`${el[0].replace(/^-+/g, '')} is ${el[1]}`));
   
-  console.log(arrValues);
+  console.log(result.join(', '));
 };
 
 parseArgs();
