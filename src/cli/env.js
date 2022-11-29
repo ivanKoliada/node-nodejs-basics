@@ -3,15 +3,12 @@ process.env.RSS_VAR2 = 'value2';
 process.env.RSS_VAR3 = 'value3';
 
 export const parseEnv = () => {
-  let result = '';
-  const objEnv = process.env;  
-
-  const arrEnvVar = Object.keys(objEnv)
-    .filter(el => el.includes('RSS_'));
-
-  arrEnvVar.forEach(el => {
-    result += `${el}=${process.env[el]}; `
-  });
+  const environment = process.env;
+  
+  const result = Object.entries(environment)
+    .filter(([el]) => el.includes('RSS_'))
+    .map((el) => el.join('='))
+    .join('; ');
 
   console.log(result);
 };
